@@ -19,3 +19,24 @@ models:
             tests:
                 - unique
                 - not_null
+                - relationships:
+                    field: id
+                    to: ref('my_first_dbt_model')
+    
+    - name: playing_with_test
+      description: "A starter dbt model"
+      columns:
+          - name: c_custkey
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+
+          - name: c_mktsegment
+            description: "The primary key for this table"
+            tests:
+                - accepted_values:
+                    values:
+                      - ['BUILDING', 'AUTOMOBILE', 'MACHINERY', 'HOUSEHOLD', 'FURNITURE']
+                    quote: false
+              

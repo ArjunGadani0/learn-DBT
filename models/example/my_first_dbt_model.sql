@@ -1,4 +1,5 @@
 
+
 /*
     Welcome to your first dbt model!
     Did you know that you can also configure models directly within SQL files?
@@ -10,15 +11,14 @@
 {{ config(materialized='table') }}
 
 with source_data as (
-
     select 1 as id
     union all
-    select null as id
-
-)
-
-select *
+    select 7 as id)
+select 
+    * 
+    --, {{ var('my_first_var') }} as a
 from source_data
+-- where id >= {{ var('my_third_var') }}
 
 /*
     Uncomment the line below to remove records with null `id` values
