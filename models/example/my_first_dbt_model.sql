@@ -8,13 +8,13 @@
     Try changing "table" to "view" below
 */
 
-{{ config(materialized='table') }}
+{{ config(materialized='table', post_hook = 'grant select on {{this}} to role analyst') }}
 
 with source_data as (
-    select 1 as id
+    select 1 as id, 'CA' as state, '2020-03-01 00:00:00.000' as updated_at
     union all
-    select 7 as id)
-select 
+    select 7 as id, 'NY' as state, '2020-01-01 00:00:00.000' as updated_at)
+select
     * 
     --, {{ var('my_first_var') }} as a
 from source_data

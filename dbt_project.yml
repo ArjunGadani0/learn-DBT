@@ -44,3 +44,11 @@ models:
     # Applies to all files under models/example/
     example:
       +materialized: table
+
+  pre-hook:
+    - "create table if not exists public.audit (model varchar, status varchar, log_time timestamp_ltz)"
+    - "insert into public.audit (model, status, log_time) values ('{{this.name}}', 'Starting Deployment', current_timestamp)"
+
+    # post-hook:
+    #   - "grant usage on schema {{target.this}} to role analyst"
+    #   - "grant select on {{this}} to role analyst"
